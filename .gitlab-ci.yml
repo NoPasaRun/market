@@ -1,0 +1,22 @@
+stages:
+  - code quality
+
+default:
+  image: registry.skillbox.ru/python:3.8.12
+  tags:
+    - students
+  cache:
+    paths:
+      - ~/.cache/pip/
+  before_script:
+    - pip install -r requirements/dev.txt
+
+isort:
+  stage: code quality
+  script:
+    - isort market/ --src=market/ -c --diff
+
+linter:
+  stage: code quality
+  script:
+    - pylint --rcfile=.pylintrc market/*

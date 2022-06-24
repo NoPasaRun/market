@@ -1,0 +1,17 @@
+<form id="payment_form" class="form Payment" action="#" method="post">
+    <div class="Payment-card">
+        <div class="form-group">
+            <label class="form-label">Номер карты
+            </label>
+            <input class="form-input Payment-bill" id="numero1" name="numero1" type="text"
+                   placeholder="9999 9999" data-mask="9999 9999" data-validate="require pay"/>
+        </div>
+    </div>
+    <div class="Payment-pay">
+        <a class="btn btn_primary" href="#"
+           hx-post="{% url "payment:progress_payment" %}"
+           hx-target="#wrap"
+           hx-swap="innerHTML"
+        >Оплатить</a>
+    </div>
+</form>

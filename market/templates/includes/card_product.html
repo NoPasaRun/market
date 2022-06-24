@@ -1,0 +1,39 @@
+{% load static %}
+{% load filtertag %}
+
+<div class="Card">
+    <a class="Card-picture" href="#">
+        {% include 'includes/image_block_with_default.html' with image=item.image %}
+    </a>
+    <div class="Card-content">
+        <strong class="Card-title"><a href="{% url 'products:detail' pk=item.pk %}">{{ item.name }}</a></strong>
+        <div class="Card-description">
+            <div class="Card-cost">
+                <span class="Card-priceOld">
+                    {{ item | get_old_price:products_actual_prices }}
+                </span>
+                <span class="Card-price">
+                    $&#32;{{ products_actual_prices | get_item:item.pk }}
+                </span>
+            </div>
+            <div class="Card-category">{{ item.category }}</div>
+            <div class="Card-hover">
+                <a class="Card-btn" href="/history/{{ item.id }}/add/">
+                    <img src="{% static 'assets/img/icons/card/bookmark.svg' %}" alt="bookmark.svg"/>
+                </a>
+{#                <a class="Card-btn" href="/add_to_cart/?product_id={{ item.id }}">#}
+{#                    <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>#}
+                </a>
+                <a class="Card-btn" href="compare.html">
+                    <img src="{% static 'assets/img/icons/card/change.svg' %}" alt="change.svg"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div
+            class="Card-sale"
+            style="display: {{ item | get_display_attr_for_discount_block:products_actual_prices }}"
+    >
+        {{ item | get_amount_of_discount:products_actual_prices }}
+    </div>
+</div>

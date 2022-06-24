@@ -1,0 +1,18 @@
+<div class="ProgressPayment"
+     hx-get="{% url 'payment:get_payment_status' payment_uid=payment_uid %}"
+     hx-trigger="load delay:4s"
+     hx-swap="outerHTML">
+
+    <div class="ProgressPayment-title">Ждем подтверждения оплаты платежной системой
+    </div>
+    <div class="ProgressPayment-title">Идентификатор оплаты: {{ id }}
+    </div>
+    <div class="ProgressPayment-icon">
+        <div class="cssload-thecube">
+            <div class="cssload-cube cssload-c1"></div>
+            <div class="cssload-cube cssload-c2"></div>
+            <div class="cssload-cube cssload-c4"></div>
+            <div class="cssload-cube cssload-c3"></div>
+        </div>
+    </div>
+</div>

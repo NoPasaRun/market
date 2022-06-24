@@ -1,0 +1,116 @@
+{% extends '_base.html' %}
+{% block main %}
+    <div class="container">
+
+        <form class="well form-horizontal" method="post"  id="contact_form">
+            {% csrf_token %}
+            <fieldset>
+
+            <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">ФИО</label>
+              <div class="col-md-4 inputGroupContainer">
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="name" placeholder="Введите имя, фамилию, очество (если имеется)" class="form-control"  type="text">
+                  </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" >Почта</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input name="email" placeholder="Введите почту" class="form-control"  type="email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Аватар</label>
+              <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input  name="avatar" class="form-control"  type="file" accept="image/*">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" >Пароль</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="password1" placeholder="Введите пароль" class="form-control"  type="password">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" >Подтверждение пароля</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="password2" placeholder="Введите пароль повторно" class="form-control"  type="password">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Телефон</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input name="phone" id="phone-mask" placeholder="+7 ( _ _ _ ) _ _ _ - _ _ - _ _" class="form-control"  type="tel">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Дата рождения</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                        <input name="birth_date" id="date-mask" placeholder="Введите дату рождения" class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-4"><br>
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button id="submit" type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+              </div>
+            </div>
+
+        </fieldset>
+        </form>
+        </div>
+        {{ errors }}
+    </div><!-- /.container -->
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        var phoneMask = IMask(
+          document.getElementById('phone-mask'), {
+            mask: '+{7} (000) 000-00-00'
+          });
+        var dateMask = IMask(
+          document.getElementById('date-mask'),
+          {
+            mask: Date,
+            min: new Date(1122, 0, 1),
+            max: new Date(2022, 0, 1),
+            lazy: false
+          });
+        var submit = document.getElementById("submit")
+        submit.addEventListener("click", function() {
+            let phone = document.getElementById("phone-mask")
+            var string = phone.value
+            string = string.replace("+7", "")
+            let phoneNumber = string.replace(/\D/g, '');
+            phone.value = phoneNumber
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,56 @@
+<div class="Section-column">
+    <div class="Section-columnSection">
+        <header class="Section-header">
+            <strong class="Section-title">Filter
+            </strong>
+        </header>
+        <div class="Section-columnContent">
+            <form class="form" action="{% url 'products:catalog' %}" method="get">
+                {% include 'products/includes/range_filter.html' with filter=main_filters.0 %}
+
+                <div class="form-group">
+                    <input class="form-input form-input_full" id="title" name="title_name" type="text"
+                           placeholder="Название">
+                </div>
+                {% include 'products/includes/list_filter.html' with filter=main_filters.1 %}
+
+                {% if spec_filters %}
+                    {% for filter in spec_filters %}
+                        {% if filter.type == 'group' %}
+                            {% include 'products/includes/group_filter.html' %}
+                        {% elif filter.type == 'range' %}
+                            {% include 'products/includes/range_filter.html' %}
+                        {% elif filter.type == 'list' %}
+                            {% include 'products/includes/list_filter.html' %}
+                        {% elif filter.type == 'bool' %}
+                            {% include 'products/includes/boolean_filter.html' %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="form-group">
+                    <div class="buttons">
+                        <button type="submit" class="btn btn_square btn_dark btn_narrow">Filter</button>
+                        <a class="btn btn_square btn_danger btn_narrow" href="{% url 'products:catalog' %}">Reset Filter</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="Section-columnSection">
+        <header class="Section-header">
+            <strong class="Section-title">Popular tags</strong>
+        </header>
+        <div class="Section-columnContent">
+            <div class="buttons">
+                <a class="btn btn_default btn_sm" href="#">Video</a>
+                <a class="btn btn_default btn_sm" href="#">Development</a>
+                <a class="btn btn_default btn_sm" href="#">Gaming</a>
+                <a class="btn btn_default btn_sm" href="#">Asus</a>
+                <a class="btn btn_default btn_sm" href="#">Development</a>
+                <a class="btn btn_default btn_sm" href="#">Video</a>
+            </div>
+        </div>
+    </div>
+</div>

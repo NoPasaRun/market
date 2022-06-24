@@ -1,0 +1,19 @@
+
+<div class="CategoriesButton-content">
+    {% for category in categories %}
+        <div class="CategoriesButton-link"><a href="#">
+            <div class="CategoriesButton-icon"><img src="assets/img/icons/departments/1.svg" alt="1.svg"/>
+            </div><span class="CategoriesButton-text">{{category.name}}</span></a>
+            {% if category.subcategories %}
+            <a class="CategoriesButton-arrow" href="#"></a>
+            <div class="CategoriesButton-submenu">          
+                {% for sub in category.subcategories %}
+                    <a class="CategoriesButton-link" href="#">
+                    <div class="CategoriesButton-icon"><img src="assets/img/icons/departments/2.svg" alt="1.svg"/>
+                    </div><span class="CategoriesButton-text">{{sub.name}}</span></a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

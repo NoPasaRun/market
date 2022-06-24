@@ -1,0 +1,8 @@
+<div class="Cards Cards_account">
+    {% for product in products %}
+        {% if section == 'account' %}
+            {% cycle ' ' 'hide_700' 'hide_md' as hide_class silent %}
+        {% endif %}
+        {% include "includes/card.html" with product=product.product %}
+    {% endfor %}
+</div>

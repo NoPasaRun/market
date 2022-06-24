@@ -1,0 +1,11 @@
+<div class="form-group">
+    <div class="range Section-columnRange">
+        <input class="range-line" id="range_{{ filter.code }}" name="range_{{ filter.code }}"
+               type="text" data-type="double" data-min="{{ filter.min_value }}" data-max="{{ filter.max_value }}"
+               data-from="{{ filter.min_filter }}" data-to="{{ filter.max_filter }}"/>
+        <div class="range-price">{{ filter.name_filter }}:&#32;
+            <div class="rangePrice" id="line_range_{{ filter.code }}">
+            </div>
+        </div>
+    </div>
+</div>

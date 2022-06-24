@@ -1,0 +1,62 @@
+  <div class="Profile">
+    <form class="form Profile-form" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="row-block">
+          <div class="form-group">
+            <label class="form-label" for="avatar">Смена аватар
+            </label>
+            <div class="Profile-avatar">
+              <div class="Profile-img"><img src="{{ profile.photo_url }}" alt="#.png"/>
+              </div>
+              <label class="Profile-fileLabel" for="avatar">Выберите аватар
+              </label>
+              <input class="Profile-file form-input" id="avatar" name="avatar" type="file" data-validate="onlyImgAvatar"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="name">Смена ФИО
+            </label>
+            <input class="form-input" id="name" name="name" value="{{ profile.name }}" type="text" placeholder="Новое ФИО:"/>
+          </div>
+        </div>
+        <div class="row-block">
+          <div class="form-group">
+            <label class="form-label" for="phone">Новый телефон
+            </label>
+            <input class="form-input" id="phone" name="phone" value="{{ profile.phone }}" placeholder="Новый номер: +7XXXXXXXXXX" type="text"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">E-mail
+                <strong>Трубуется для аутентификации!</strong>
+            </label>
+            <input class="form-input" id="email" name="email" type="text" placeholder="Ваш почтовый адрес" data-validate="require"/>
+          </div>
+          {% if is_authenticated_by_email == False %}
+            <span style="color: rgb(255, 0, 0)">Неверный email</span>
+          {% endif %}
+          <div class="form-group">
+            <label class="form-label" for="password">Новый пароль
+            </label>
+            <input class="form-input" autocomplete="off" id="password" name="password1" type="password" placeholder="Тут можно изменить пароль"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="passwordReply">Подтверждение нового пароля
+            </label>
+            <input name="password2" autocomplete="off" class="form-input" id="passwordReply" type="password" placeholder="Введите пароль повторно"/>
+          </div>
+          {{ errors }}
+          <div class="form-group">
+            <div class="Profile-btn">
+              <button class="btn btn_success" type="submit">Сохранить
+              </button>
+            </div>
+            {% if updated %}
+              <div class="Profile-success">Профиль успешно сохранен
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

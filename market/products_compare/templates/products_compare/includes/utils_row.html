@@ -1,0 +1,7 @@
+{% load static %}
+<a class="Compare-btn" href="{% comment %}{% url 'cart:add_to_cart' product_id=product.id %}{% endcomment %}">
+    <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+</a>
+<a class="Compare-btn" href="{% url 'catalog:remove_from_compare' product_id=product.id %}">
+    <img src="{% static 'assets/img/icons/card/delete.svg' %}" alt="delete.svg"/>
+</a>

@@ -1,0 +1,32 @@
+{% load static %}
+<div class="Card {{ hide_class }}">
+    <a class="Card-picture" href="{{ product.photo_url }}">
+        <img src="{{ product.photo_url }}" alt="card.jpg"/></a>
+    <div class="Card-content">
+        <strong class="Card-title">
+            <a href="#">{{ product.name }}</a>
+        </strong>
+        <div class="Card-description">
+{#            <div class="Card-cost">#}
+{#                <span class="Card-priceOld">${{ product.old_price }}</span>#}
+{#                <span class="Card-price">${{ product.price }}</span>#}
+{#            </div>#}
+            <div class="Card-category">
+                {{ product.category }}
+            </div>
+            <div class="Card-hover">
+                <a class="Card-btn" href="/history/{{ product.id }}/add">
+                    <img src="{% static 'assets/img/icons/card/bookmark.svg' %}" alt="bookmark.svg"/></a>
+                <a class="Card-btn"
+                   hx-post="{% url 'catalog:add_to_compare' product_id=product.id %}"
+                   hx-trigger="click"
+                   hx-target="#compare-count-block"
+                   hx-swap="innerHTML">
+                    <img src="{% static 'assets/img/icons/card/change.svg' %}" alt="change.svg"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="Card-sale">{{ product.discount.value }}{{ product.discount.type }}
+    </div>
+</div>

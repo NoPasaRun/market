@@ -1,0 +1,103 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block main %}
+  <style>
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+  </style>
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">Корзина
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="/">home</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Корзина</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="Section">
+      <div class="wrap">
+        <form class="form Cart" method="post">
+          {% csrf_token %}
+          {% for seller_product in cart %}
+            <div class="Cart-product">
+              <div class="Cart-block Cart-block_row">
+                <div class="Cart-block Cart-block_pict"><a class="Cart-pict" href="{% url 'products:detail' pk=seller_product.product.pk %}"><img class="Cart-img" src="/media/{{ seller_product.product_image }}" alt="card.jpg"/></a>
+                </div>
+                <div class="Cart-block Cart-block_info"><a class="Cart-title" href="{% url 'products:detail' pk=seller_product.product.pk %}">{{ seller_product.product_name }}</a>
+                  <div class="Cart-desc">{{ seller_product.product_description }}
+                  </div>
+                </div>
+                <div class="Cart-block Cart-block_price">
+                  <div id="Price-{{ seller_product.id }}" class="Cart-price">{{ seller_product.price }}$
+                  </div>
+                </div>
+              </div>
+              <div class="Cart-block Cart-block_row">
+                <div class="Cart-block Cart-block_seller">
+                  <select class="form-select" onchange="GoToChangeCart(this.options[this.selectedIndex])">
+                    {% for seller in seller_product.sellers %}
+                      {% if seller.id == seller_product.seller.id %}
+                        <option url="/change_cart/?seller_id={{ seller.id }}&product_id={{ seller_product.product_id }}&seller_product_id={{ seller_product.id }}" value="{{ seller.id }}" selected="selected">
+                          {{ seller }}
+                        </option>
+                      {% else %}
+                        <option url="/change_cart/?seller_id={{ seller.id }}&product_id={{ seller_product.product_id }}&seller_product_id={{ seller_product.id }}" value="{{ seller.id }}">
+                          {{ seller }}
+                        </option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="Cart-block Cart-block_amount">
+                  <div class="Cart-amount">
+                    <div class="Amount">
+                      <button class="Amount-remove" type="button"></button>
+                      <input class="Amount-input form-input" name="amount" id="{{ seller_product.id }}" type="number" value="{{ seller_product.amount }}"/>
+                      <button class="Amount-add" type="button"></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="Cart-block Cart-block_delete"><a class="Cart-delete" href="/delete_from_cart/?seller_product_id={{ seller_product.id }}"><img src="{% static '/assets/img/icons/card/delete.svg' %}" alt="delete.svg"/></a>
+                </div>
+              </div>
+            </div>
+            {{ seller_product.message }}
+          {% endfor %}
+          <div class="Cart-total">
+            <div class="Cart-block Cart-block_total">
+              <strong class="Cart-title" id="y">Итого:</strong>
+              <span class="Cart-price Total-price">{{ cart_total_price }}$</span>
+              <span class="Cart-price_old Total-price">
+                {% if cart_total_price != cart_total_price_old %}
+                  {{ cart_total_price_old }}$
+                {% endif %}
+            </span>
+            </div>
+            <div class="Cart-block"><a class="btn btn_success btn_lg" href="/order/">Оформить заказ</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+      function GoToChangeCart(option) {
+          let url = option.getAttribute("url")
+          url += "&amount=" + $("#"+option.value).attr("value")
+          window.location = url
+      }
+  </script>
+{% endblock %}
+

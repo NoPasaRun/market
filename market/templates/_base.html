@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+{% load django_htmx %}
+
+<html lang="en">
+<head>
+  {% block meta %}
+  <meta name="description" content="Описание страницы">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  {% endblock %}
+  {% block links %}
+  <link href="{% static 'favicon.ico' %}" rel="shortcut icon">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Regular.woff' %}" as="font">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Italic.woff' %}" as="font">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Bold.woff' %}" as="font">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Bold_Italic.woff' %}" as="font">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Light.woff' %}" as="font">
+  <link rel="prefetch" href="{% static 'assets/fonts/Roboto/Roboto-Light_Italic.woff' %}" as="font">
+  <link rel="stylesheet" href="{% static 'assets/css/fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/basic.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/extra.css' %}">
+  <script src="{% static 'assets/plg/CountDown/countdown.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script src=" {% static 'assets/js/htmx.min.js' %} " defer></script>
+  {% endblock %}
+  {% block title %}<title>Megano</title>{% endblock %}
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' >
+  {% block header %}
+  {% include 'header.html' %}
+  {% endblock %}
+  {% block main %}{% endblock %}
+  {% block pagination %}{% endblock %}
+  {% block footer %}
+  {% include 'footer.html' %}
+  {% endblock %}
+  {% block scripts %}
+    <script src="{% static 'assets/plg/form/jquery.form.js' %}"></script>
+    <script src="{% static 'assets/plg/form/jquery.maskedinput.min.js' %}"></script>
+    <script src="{% static 'assets/plg/range/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'assets/plg/Slider/slick.min.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+    <script src="{% static 'assets/js/ajax.js' %}"></script>
+    <script src="{% static 'assets/js/buttons.js' %}"></script>
+  {% endblock %}
+</body>
+</html>

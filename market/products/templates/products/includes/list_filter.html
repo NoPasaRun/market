@@ -1,0 +1,11 @@
+<div class="form-group">
+    <!-- - var options = setOptions(items, ['value', 'selected', 'disabled']);-->
+    <div class="form-selectWrap">
+        <select class="form-select" size="5" multiple="multiple" name="list_{{ filter.code }}">
+            <option value="{{ filter.code }}" disabled="disabled">{{filter.name_filter}}</option>
+            {% for option in filter.options %}
+                <option value="{{ option.id }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

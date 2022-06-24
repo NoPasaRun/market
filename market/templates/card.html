@@ -1,0 +1,29 @@
+{% load static %}
+<div class="Card">
+  <a class="Card-picture" href="#">
+     <img src="/media/{{seller_product.product.image}}" alt="card.jpg"/>
+  </a>
+  <div class="Card-content">
+    <strong class="Card-title"><a href="#">{{seller_product.product.name}}</a>
+    </strong>
+    <div class="Card-description">
+      <div class="Card-cost"><span class="Card-priceOld">${{seller_product.old_price}}</span><span class="Card-price">${{seller_product.price}}</span>
+      </div>
+      <div class="Card-category">{{seller_product.product.category}}
+      </div>
+      <div class="Card-hover">
+          <a class="Card-btn" href="/history/{{ seller_product.product.id }}/add">
+              <img src="{% static 'assets/img/icons/card/bookmark.svg' %}" alt="bookmark.svg"/>
+          </a>
+          <a class="Card-btn" href="/add_to_cart/?seller_product_id={{ seller_product.id }}">
+              <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+          </a>
+          <a class="Card-btn" href="compare.html">
+              <img src="{% static 'assets/img/icons/card/change.svg' %}" alt="change.svg"/>
+          </a>
+      </div>
+    </div>
+  </div>
+  <div class="Card-sale">{{seller_product.product.discount}}
+  </div>
+</div>

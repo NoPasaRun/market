@@ -1,0 +1,13 @@
+{#<div class="form-group">#}
+<div class="form-group" >
+    <label>{{ filter.name_filter }}</label>
+    {% for spec in filter.specs %}
+    <div class="form-group-element">
+        <label class="toggle">
+            <input type="checkbox" name="group_{{ filter.code }}" value="{{ spec.value }}">
+            <span class="toggle-box"></span>
+            <span class="toggle-text">{{ spec.value }} {{ spec.specification.uom }}</span>
+        </label>
+    </div>
+    {% endfor %}
+</div>

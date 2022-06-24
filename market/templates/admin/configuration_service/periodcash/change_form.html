@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n  static %}
+
+{% block content %}
+	<form action="{% url 'configuration:period' %}" method="post">
+		{#	<form action="https://jsonplaceholder.typicode.com/posts" method="post">#}
+		{% csrf_token %}
+		{% for form in cash_form %}
+			<div class="block_cash_period">
+				<input type="checkbox" name="{{ form.name }}">
+				{{ form.label }} {{ form }}
+			</div>
+		{% endfor %}
+		<button name="action" value="save" type="submit">{% trans 'Сохранить' %}</button>
+		<button name="action" value="drop_all" type="submit">{% trans 'Сбросить весь кэш' %}</button>
+		<button name="action" value="drop" type="submit">{% trans 'Сбросить кэш у выбранных элементов' %}</button>
+	</form>
+{% endblock %}

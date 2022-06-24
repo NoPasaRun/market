@@ -1,0 +1,20 @@
+{% load static %}
+{% for row in product_list %}
+    <div class="Compare-row">
+        <div class="Compare-title {% if row.compare_title %}Compare-title_blank{% endif %}"></div>
+        <div class="Compare-products">
+            {% for product in row.data %}
+                <div class="Compare-product">
+                    <div class="Compare-nameProduct {% if row.row_type == "header" or row.row_type == "utils" %}Compare-nameProduct_main{% endif %}">
+                        {{ product.name }}
+                    </div>
+                    <div class="Compare-feature">
+                        {% if row.row_type == "header" or row.row_type == "utils" %}
+                            {% include row.html_path %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
